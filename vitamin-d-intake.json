@@ -1,0 +1,46 @@
+{
+    "st": {
+      "st1": {
+        "low": "15-20min",
+        "moderate": "10-15min",
+        "high": "5-10min",
+        "very high": "2-8min",
+        "extreme": "1-5min"
+      },
+      "st2": {
+        "low": "20-30min",
+        "moderate": "15-20min",
+        "high": "10-15min",
+        "very high": "5-10min",
+        "extreme": "2-8min"
+      },
+      "st3": {
+        "low": "30-40min",
+        "moderate": "20-30min",
+        "high": "15-20min",
+        "very high": "10-15min",
+        "extreme": "5-10min"
+      },
+      "st4": {
+        "low": "40-60min",
+        "moderate": "30-40min",
+        "high": "20-30min",
+        "very high": "15-20min",
+        "extreme": "10-15min"
+      },
+      "st5": {
+        "low": "60-80min",
+        "moderate": "40-60min",
+        "high": "30-40min",
+        "very high": "20-30min",
+        "extreme": "15-20min"
+      },
+      "st6": {
+        "low": "0min",
+        "moderate": "60-80min",
+        "high": "40-60min",
+        "very high": "30-40min",
+        "extreme": "20-30min"
+      }
+    }
+  }  

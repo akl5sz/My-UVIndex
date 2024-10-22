@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <!-- <h1>UV Index: <= Math.round(content.uv) %></h1> -->
+            <h1>UV Index</h1>
+            <div class="left-inner-container">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-sun" viewBox="0 0 16 16">
+                    <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"/>
+                </svg>
+                <h1 style="margin-left: 15px;">5</h1>
+            </div>
+           
+            <!-- <canvas id="myChart" style="width:100%;max-width:600px"></canvas> -->
+            <!-- <h2><= intensity %></h2> -->
+            <h2>high</h2>
+            <img src="/images/sunglasses.PNG" alt="">
+            <img src="/images/sunscreen.PNG" alt="">
+            <img src="/images/hat.PNG" alt="">
+            <img src="/images/shadow.PNG" alt="">
+            <img src="/images/shirt.PNG" alt="">
+            <img src="/images/indoors.PNG" alt="">
+        </div>
+        <div class="right">
+            <div class="right-inner-container">
+                <!-- <h3>Required Vitamin D Intake:  <= dailyIntake %>  </h3> -->    
+                <div class="card">
+                    <div>Required Vitamin D Intake:</div>
+                    <div>bla</div>
+                </div>
+                <!-- < if (content.safe_exposure_time[st] != null) { %>
+                <h3>Safe exposure time (mins) till burn: <= Math.floor(content.safe_exposure_time[st] / 60) %> hrs & <= content.safe_exposure_time[st] % 60 %> minutes</h3>
+                < } else { %>
+                <h3>Safe exposure time (mins) till burn: Unlimited!</h3>
+                < } %> -->
+                <div class="card">
+                    <div>Safe exposure time (mins) till burn: </div>
+                    <div>Unlimited!</div>
+                </div>
+            </div>
+            <!-- <h4>Max UV: <= Math.round(content.uv_max) %> at <= uv_max_time %></h4> -->
+            <h3>Max UV Index of 6 at 12:00 pm</h3>
+
+            <img src="/images/sunglasses.PNG" alt="">
+            <img src="/images/sunscreen.PNG" alt="">
+            <img src="/images/hat.PNG" alt="">
+            <img src="/images/shadow.PNG" alt="">
+            <img src="/images/shirt.PNG" alt="">
+            <img src="/images/indoors.PNG" alt="">
+        </div>
+    </div>
+    <!-- <
+        let xValues = [];
+        let yValues = [];
+
+        for(let i = 0; i<forecast.length; i++){
+            const date = new Date(forecast[i].uv_time);
+
+            const options = {
+                timeZone: 'America/New_York', 
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false
+            };
+            
+            const formattedTime = date.toLocaleString('en-US', options);
+
+            xValues.push(formattedTime);
+            yValues.push(Math.round(forecast[i].uv));
+        }
+    %>
+    <div id="mydiv" data-test='<= JSON.stringify(xValues) %>'></div>
+    <div id="mydiv2" data-test='<= JSON.stringify(yValues) %>'></div>
+    
+    <script>
+        var xValues = JSON.parse(document.getElementById('mydiv').dataset.test);
+        var yValues = JSON.parse(document.getElementById('mydiv2').dataset.test);
+
+        new Chart("myChart", {
+          type: "line",
+          data: {
+            labels: xValues,
+            datasets: [{ 
+              data: yValues,
+              borderColor: "blue",
+              fill: false
+            }]
+          },
+          options: {
+            legend: {display: false}
+          }
+        });
+    </script> -->
+</body>
+</html>

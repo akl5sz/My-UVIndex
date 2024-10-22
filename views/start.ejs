@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <form id="locationForm" method="post" action="/home">
+        <label for="skin_container">Select Skin Type</label>
+        <div class="skin-container" id="skin_container">
+            <input type="radio" id="st1" name="st" value="st1">
+            <label for="st1">
+                <div class="skin-div" style="background-color: #f1d1b1;"></div>
+            </label>
+            <input type="radio" id="st2" name="st" value="st2">
+            <label for="st1"></label>
+                <div class="skin-div" style="background-color: #e4b590;"></div>
+            </label>
+            <input type="radio" id="st3" name="st" value="st3">
+            <label for="st1"></label>
+                <div class="skin-div" style="background-color: #cf9f7d;"></div>
+            </label>
+            <input type="radio" id="st4" name="st" value="st4">
+            <label for="st1"></label>
+                <div class="skin-div" style="background-color: #b67851;"></div>
+            </label>
+            <input type="radio" id="st5" name="st" value="st5">
+            <label for="st1"></label>
+                <div class="skin-div" style="background-color: #a15e2d;"></div>
+            </label>
+            <input type="radio" id="st6" name="st" value="st6">
+            <label for="st1"></label>
+                <div class="skin-div" style="background-color: #513938;"></div>
+            </label>
+        </div>
+
+        <label for="lng">Longitude:</label>
+        <input type="text" id="lng" name="lng" readonly>
+    
+        <label for="lat">Latitude:</label>
+        <input type="text" id="lat" name="lat" readonly>
+            
+        <input type="submit" id="submit">
+    </form>
+
+    <button id="myLocation">My Location</button>
+    <button id="randomLocation">Random Location</button>
+
+    <div id="map"></div>
+
+    <script>
+        (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
+        ({key: "", v: "weekly"}); //key not published on this github due to privacy concerns
+    </script>
+    <script>
+        $(document).ready(function() {
+            let map;
+            let draggableMarker;
+
+            async function initMap() {
+                const { Map, InfoWindow } = await google.maps.importLibrary("maps");
+                const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+                map = new Map(document.getElementById("map"), {
+                    center: { lat: 37.39094933041195, lng: -122.02503913145092 },
+                    zoom: 14,
+                    mapId: "4504f8b37365c3d0",
+                });
+                const infoWindow = new InfoWindow();
+                draggableMarker = new AdvancedMarkerElement({
+                    map,
+                    position: { lat: 37.39094933041195, lng: -122.02503913145092 },
+                    gmpDraggable: true,
+                    title: "This marker is draggable.",
+                });
+
+                draggableMarker.addListener("dragend", (event) => {
+                    const position = draggableMarker.position;
+
+                    infoWindow.close();
+                    $("#lng").val(position.lng);
+                    $("#lat").val(position.lat);
+                });
+            }
+
+            initMap();
+
+            function getLocation() {
+                //https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition
+                const options = {
+                    enableHighAccuracy: true,
+                    timeout: 5000,
+                    maximumAge: 0,
+                };
+
+                function success(pos) {
+                    const crd = pos.coords;
+
+                    $("#lng").val(crd.longitude);
+                    $("#lat").val(crd.latitude);
+                    map.setCenter(new google.maps.LatLng(crd.latitude, crd.longitude));
+                    map.setZoom(15); 
+                    draggableMarker.position = new google.maps.LatLng(crd.latitude, crd.longitude);
+                }
+
+                function error(err) {
+                    console.warn(`ERROR(${err.code}): ${err.message}`);
+                }
+
+                navigator.geolocation.getCurrentPosition(success, error, options);
+            }
+
+            $("#myLocation").click(function(event){
+                event.preventDefault();
+                getLocation();
+            });
+
+            $("#randomLocation").click( async function(event){
+                //TODO: Change to existing list of randomly generated long and lat using APIs
+                event.preventDefault();
+                //https://stackoverflow.com/questions/6878761/javascript-how-to-create-random-longitude-and-latitudes
+                let randomLat = (Math.random() * (60 - -30) + -30).toFixed(6); // Between -30 to 60 lat (mostly land areas)
+                let randomLong = (Math.random() * (-30 - -130) + -130).toFixed(6);
+                
+                $("#lat").val(randomLat);
+                $("#lng").val(randomLong);
+
+                map.setCenter(new google.maps.LatLng(parseFloat(randomLat), parseFloat(randomLong)));
+                map.setZoom(15); 
+                draggableMarker.position = new google.maps.LatLng(parseFloat(randomLat), parseFloat(randomLong));
+            });
+        });
+    </script>
+</body>
+</html>
