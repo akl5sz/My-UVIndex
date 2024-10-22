@@ -1,1 +1,2 @@
 # My-UVIndex
+This is a Node.js app made with the Express framework that finds the user's current local UV index and other predicted factors as returned from API requests made to [OpenUV](https://www.openuv.io/dashboard) with Axios. The Google Maps API was embedded into this application to allow users to select locations interactively and retrieve coordinates. This application follows RESTful principles.
